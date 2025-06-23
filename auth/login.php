@@ -18,6 +18,11 @@
                     echo $_SESSION['register_success'];
                     unset($_SESSION['register_success']);
                 }
+                
+                if(isset($_SESSION['login_required'])) {
+                    echo $_SESSION['login_required'];
+                    unset($_SESSION['login_required']);
+                }
             ?>
 
             <form action="" method="POST" class="auth-form">
@@ -65,16 +70,20 @@ if(isset($_POST['login'])) {
             $_SESSION['customer_name'] = $row['full_name'];
             $_SESSION['customer_email'] = $row['email'];
             $_SESSION['customer_phone'] = $row['phone'];
+            $_SESSION['customer_address'] = $row['address'];
             
             $_SESSION['login_success'] = "<div class='success text-center'>Login successful! Welcome back.</div>";
             header('location:' . SITEURL . 'customer-dashboard.php');
+            exit();
         } else {
             $_SESSION['login_error'] = "<div class='error text-center'>Invalid email or password.</div>";
             header('location:' . SITEURL . 'auth/login.php');
+            exit();
         }
     } else {
         $_SESSION['login_error'] = "<div class='error text-center'>Account not found. Please register first.</div>";
         header('location:' . SITEURL . 'auth/login.php');
+        exit();
     }
 }
 ?>

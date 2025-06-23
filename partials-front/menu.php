@@ -39,7 +39,7 @@
                         <i class="fas fa-sign-out-alt"></i> Logout
                     </a></li>
                     <li style="color: var(--primary-color); font-weight: 600;">
-                        <i class="fas fa-user-circle"></i> <?php echo $_SESSION['customer_name']; ?>
+                        <i class="fas fa-user-circle"></i> <?php echo htmlspecialchars($_SESSION['customer_name']); ?>
                     </li>
                     <?php else: ?>
                     <li><a href="<?php echo SITEURL; ?>auth/login.php">
@@ -57,6 +57,14 @@
             </div>
         </div>
     </nav>
+
+    <?php 
+    // Show logout message if exists
+    if(isset($_SESSION['logout_message'])) {
+        echo $_SESSION['logout_message'];
+        unset($_SESSION['logout_message']);
+    }
+    ?>
 
     <script>
         // Navbar scroll effect

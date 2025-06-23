@@ -114,9 +114,11 @@ if(isset($_POST['register'])) {
     if($res) {
         $_SESSION['register_success'] = "<div class='success text-center'>Registration successful! Please login to continue.</div>";
         header('location:' . SITEURL . 'auth/login.php');
+        exit();
     } else {
         $_SESSION['register_error'] = "<div class='error text-center'>Registration failed. Please try again.</div>";
         header('location:' . SITEURL . 'auth/register.php');
+        exit();
     }
 }
 ?>
